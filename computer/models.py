@@ -16,7 +16,7 @@ class ComputerSpecification(models.Model):
   brand = models.ForeignKey(ComputerBrands, blank=True, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"{self.generation} - {self.brand.brand_name}"
+    return f"{self.brand.brand_name} - {self.generation}th gen - {self.ram}GB"
 
 class Computer(models.Model):
   computer_code = models.CharField(max_length=50, blank=True, unique=True)

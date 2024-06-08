@@ -10,6 +10,15 @@ def index(request):
     quantity = request.POST.get('quantity')
     unitRate = request.POST.get('unitRate')
 
+
+    try:
+      computer_info = Computer.objects.get(computer_code=computerCode)
+      if computer_info:
+        messages.error(request, "Computer code must be unique")
+        return redirect('index')
+    except:
+      pass
+
     try:
       computer = ComputerSpecification.objects.get(id=computer_id)
     except:

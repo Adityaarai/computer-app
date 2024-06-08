@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Computer information</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Update Computer Information</h1>
+    <form action="{% url 'update' computer.id %}" method="post">
+      {% csrf_token %}
+      {% if computer %}
+        <div class="form-group">
+          <label for="computerCode">Computer Code</label>
+          <input class="form-control" value="{{ computer.computer_code }}" type="text" name="computerCode" id="computerCode">
+        </div>
+        <div class="form-group">
+          <label for="computer">Computer</label>
+          <select name="computer" id="computer" class="form-control">
+            {% for specs in computerspecs %}
+              <option value="{{ specs.id }}" {% if computer.computer.id == specs.id %} selected {% endif %}>{{ specs }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input class="form-control" type="number" name="quantity" id="quantity" value="{{ computer.quantity }}">
+        </div>
+        <div class="form-group">
+          <label for="unitRate">Unit Rate</label>
+          <input class="form-control" step="0.01" type="number" name="unitRate" id="unitRate" value="{{ computer.unit_rate }}">
+        </div>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">Update Computer</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
